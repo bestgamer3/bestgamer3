@@ -1,0 +1,133 @@
+{
+    "Games" : [
+       {
+        "GameName": "CF Game Ceneter",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/CF_Game_Center_LOGO11.png",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/CF_Game_Center_LOGO11.png",
+        "GameDescription": "CF Game Center is made for CF!! Includes FiveM,Overwatch 2 and more!!",
+        "GameSize": "2 MB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://files.zortos.me/Files/Expirimental/CF_Game_Center.exe",
+        "GameExe": "CF_Game_Center.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "1/26/2023\n-------------------------------\nAdded CF Game Center",
+        "GamePaid": false
+      }, 
+      {
+        "GameName": "CB Launcher",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/CB.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/CB.jpg",
+        "GameDescription": "CB Luncher is a launcher made by Port007 Were you can download games and play them",
+        "GameSize": "2 MB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://github.com/devporter007/binarybuildscb/releases/download/1.0/CB.Launcher.exe",
+        "GameExe": "CB.Launcher.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/30/2022\n-------------------------------\nAdded CB Launcher",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Teardown",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Teardown-cover.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Teardown-icon.jpg",
+        "GameDescription": "Teardown is a physics-based destruction sandbox game developed by Finnish indie studio Red Blue Games. The game was released on Steam Early Access on 28 August 2018, and was fully released on 28 August 2019. The game is available on Microsoft Windows, macOS, and Linux.",
+        "GameSize": "3 GB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://files.zortos.me/Files/Games/Teardown_crack.zip",
+        "GameExe": "\\Teardown_crack\\teardown.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded Teardown Crack",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Minecraft",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/mc.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/crafting_table_480px.png",
+        "GameDescription": "Minecraft is a sandbox video game developed by Mojang. The game was created by Markus Persson in the Java programming language. It was publicly released for the PC on May 17, 2009, as a developmental alpha version and, after gradual updates, was published as a full release version on November 18, 2011.",
+        "GameSize": "1 GB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://launcher.mojang.com/download/Minecraft.exe",
+        "GameExe": "\\Minecraft.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded Minecraft",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Lunar Client",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/mc.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/crafting_table_480px.png",
+        "GameDescription": "Minecraft is a sandbox video game developed by Mojang. The game was created by Markus Persson in the Java programming language. It was publicly released for the PC on May 17, 2009, as a developmental alpha version and, after gradual updates, was published as a full release version on November 18, 2011.",
+        "GameSize": "1 GB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://launcherupdates.lunarclientcdn.com/Lunar%20Client%20v2.15.1.exe",
+        "GameExe": "\\LunarClient.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded Lunar Client",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Overwolf", 
+        "GameImage": "https://img.icons8.com/nolan/512/overwolf--v2.png",
+        "GameIcon" : "https://img.icons8.com/nolan/512/overwolf--v2.png",
+        "GameDescription": "I went after this program to install Overwolf CurseForge initially, but you can enjoy everything Overwolf Launcher provides.",
+        "GameSize": "300 MB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://files.zortos.me/Files/Launchers/Overwolf.zip",
+        "GameExe": "Overwolf\\OverwolfLauncher.exe", 
+        "GameArguments": "",
+        "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Overwolf",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Roblox",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Robloxposter.jpg",
+        "GameIcon" : "https://art.pixilart.com/077d74a814ece32.png",
+        "GameDescription": "Roblox is a massively multiplayer online game creation platform that allows users to design their own games and play a wide variety of different types of games created by other users. The platform hosts user-created games and virtual worlds covering a wide variety of genres, from traditional racing and role-playing games to simulations and obstacle courses.",
+        "GameSize": "250 MB",
+        "GameDownloadCloudURL": "",
+        "GameDownloadURL": "https://picteon.dev/files/Roblox.zip",
+        "GameExe": "Roblox\\Versions\\version-995b3631bc754ce1\\RobloxPlayerLauncher.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded Roblox",
+        "GamePaid": false
+      },
+      {
+        "GameName": "RobloxFPSUnlocker",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/RobloxFpsUnlocker.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/RobloxFpsUnlocker.jpg",
+        "GameDescription": "Roblox FPS Unlocker is a free program that allows you to unlock the FPS limit in Roblox. This means that you can play Roblox at a higher FPS than the default 60 FPS. This is useful for people who have a high refresh rate monitor and want to play Roblox at a higher FPS.",
+        "GameSize": "10 MB",
+        "GameDownloadCloudURL": " ",
+        "GameDownloadURL": "https://github.com/axstin/rbxfpsunlocker/releases/download/v4.4.3/rbxfpsunlocker-x64.zip",
+        "GameExe": "rbxfpsunlocker.exe",
+        "GameArguments": "",
+        "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded RBX Fps Unlocker",
+        "GamePaid": false
+      },
+      {
+        "GameName": "Growtopia",
+        "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/growtopia.png",
+        "GameIcon" : "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/growtopia.png",
+        "GameDescription": "Growtopia, commonly referred to as GT, is a massively multiplayer online sandbox video game where players can chat, farm, add friends, trade, build worlds, and engage in player versus player combat.",
+        "GameSize": "360 MB",
+        "GameDownloadURL": "https://files.zortos.me/Files/Launchers/Growtopia.zip", 
+        "GameExe": "Growtopia\\Growtopia.exe", 
+        "GameArguments": "",
+        "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Growtopia",
+        "GamePaid": false
+      },
+      {
+        "GameName": "winrar",
+        "GameImage": "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/images.jpg",
+        "GameIcon" : "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/images.jpg",
+        "GameDescription": "Winrar just for testing",
+        "GameSize": "360 MB",
+        "GameDownloadURL": "https://doc-04-bs-docs.googleusercontent.com/docs/securesc/se34ekushfth5fau1j4jgt1drk7gb2c8/jp5ujqqhmpnk4ttd6l62n7j4l6e0pen3/1677798150000/10178007906181799698/10178007906181799698/18RJpFuWegLTd9UyGX0XsApsC0QxuhkcZ?e=download&ax=AB85Z1C8FZXT8gkizC49Oacuwy8C2Xfzrwa9GXCipwKMUdY6QhqkMNLMFPmugOHFS2ohnJVfHNpbmtiIe9kvgqkkrbYAjifpGh5h6R3KKqfrZMGe39ayc-MczzQhwVY3ldlS-57aKZjjtOUXElOTGaLcdcqdNUCRtKZbwidVUkzTJJSJvvohwy64wuC7cLXGjuSoSIiADVOhTxrJW5vNI_pWKCe_NZDao-qqd1yWOdwIJuTpQLkjh8gpVk35t9mZiQ0brk9CBpw8BMIq4nJveMYms9HAGV7w6iRn50VlS4TaZAQY2iXMEu8GbsPdciF_e8tND4LQGD7yAuxBwzA_6d1w2q1hqPwwq9KLnFWaEAUmBJ6XIf6ezAK_dzxNiKAeVB8CuBtlBQ6UVypU7FZT-lQJx0ssHs0kcASg_VaAhPGyvvq_CfbsanNCha8dkrYkZh60mzlp1iDLSEW0ELNemDFYR5DvMrR8kNKhkQD_syGEhVzHWUjLw4X1N1R9JaKKcy_LwkB_0_33JIFEUClkmGqT7BHAeabVGSITtxMqrRjDoPlAdVSWdmU6w2oQ-IU9UM692aSdsHQMe2X9oIXLBfNGGizU6w4gPlfb_O6L30GdEuNAFz73YP8dbwjbnXY9koCp4hJMy-Rdm-ppaimSozV8nOPA4LHje3xrvt4pjXp3hLQl3i6YgyX9DpD3UGcZWuc56y3ey3poo2mbkgof3AXo2hLOd0DOOt-boL0M7JKoUYBGOubhwxbrp6C8Nm5WCeWf7tX9mbdu7YU6vMWjiz3c93EElFPveOvl3nRHU_yLYWYra3dZ59NiuWBATd_W28MQr3Bt88eImDbSn0HD0hzt65fjuPIdD_EReW8OOkHkkZ5Yjoitefu56LbYlT-68455b7Hu9YPwy_r13s9Eb-sYez9phM8MSO5qMjyjPdEhqtoiJbrBk7ZGkjIPcDI6k-b0vcg7RdGhWY8YRMRrEdnf7FZ0eFwJg_JUKCNfHoBymOTGlw&uuid=cb007541-9df6-4ebd-b9f7-677dd69f58a7&authuser=1&nonce=0ivpu9vahqm94&user=10178007906181799698&hash=53icvlp9815g5cqlhrmupmkp3je01i7u", 
+        "GameExe": "Winrar\\Winrar.exe", 
+        "GameArguments": "",
+        "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Winrar",
+        "GamePaid": false
+      }
+	  
+    }		
+]
