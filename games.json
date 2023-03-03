@@ -122,7 +122,7 @@
         "GameIcon" : "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/images.jpg",
         "GameDescription": "Winrar just for testing",
         "GameSize": "4.60 MB",
-        "GameDownloadURL": "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/WinRAR.rar", 
+        "GameDownloadURL": "https://www.dropbox.com/s/dtyc4nt6t444m2r/WinRAR.rar?dl=1", 
         "GameExe": "WinRAR//WinRAR.exe", 
         "GameArguments": "",
         "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Winrar",
