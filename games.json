@@ -27,14 +27,14 @@
         "GamePaid": false
       },
       {
-        "GameName": "Teardown",
+        "GameName": "Undertale",
         "GameImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Teardown-cover.jpg",
         "GameIcon" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/icon_thumb/eb8957cfa91a0992d3570d7fac93cb8e.png",
-        "GameDescription": "Teardown is a physics-based destruction sandbox game developed by Finnish indie studio Red Blue Games. The game was released on Steam Early Access on 28 August 2018, and was fully released on 28 August 2019. The game is available on Microsoft Windows, macOS, and Linux.",
+        "GameDescription": "just testing.",
         "GameSize": "165.40 MB",
         "GameDownloadCloudURL": "",
         "GameDownloadURL": "https://download1322.mediafire.com/jqd04mjjn3rgRXA6GpiVUR5ADenWMeBiiJWrQDvr7ScsZ238dVefazmamRpWLsAGK_Nca_Rlxtr-P-PyWb0gluk5vieZ/vn6c44yqt5x6eyy/Undertale.zip",
-        "GameExe": "\\Undertale\\Undertale.exe",
+        "GameExe": "\\Undertale\\Undertale\\Undertale.exe",
         "GameArguments": "",
         "GameUpdateLog": "11/20/2022\n-------------------------------\nAdded Undertale",
         "GamePaid": false
