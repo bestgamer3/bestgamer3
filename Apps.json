@@ -61,8 +61,8 @@
       "AppDescription": "Zortos Unzipper is a free and open-source unzipper for Windows.",
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
-      "AppDownloadUrl": "https://store1.gofile.io/download/bd1ad9e7-f08c-4475-9156-4c65723d1999/vlc.zip",
-      "AppExe": "vlc\\vlc-3.0.18-win32.exe",
+      "AppDownloadUrl": "https://store10.gofile.io/download/ad201ed3-23e6-441c-950d-131259a3f3ff/vlc.exe",
+      "AppExe": "vlc.exe",
       "AppArguments": "",
       "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded HxD"
     },
