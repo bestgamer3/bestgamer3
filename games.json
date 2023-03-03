@@ -121,9 +121,9 @@
         "GameImage": "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/images.jpg",
         "GameIcon" : "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/images.jpg",
         "GameDescription": "Winrar just for testing",
-        "GameSize": "360 MB",
-        "GameDownloadURL": "https://store1.gofile.io/download/f48280c0-bbff-4452-aad6-cc2eebddcb3c/vlc-3.0.18-win32.zip", 
-        "GameExe": "vlc-3.0.18-win32.exe", 
+        "GameSize": "4.60 MB",
+        "GameDownloadURL": "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/WinRAR.rar", 
+        "GameExe": "WinRAR//WinRAR.exe", 
         "GameArguments": "",
         "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Winrar",
         "GamePaid": false
