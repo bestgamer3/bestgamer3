@@ -1,0 +1,260 @@
+{
+  "Apps": [
+    {
+      "AppName": "Desktop",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/desktop_480px.png",
+      "AppDescription": "Runs script that opens Desktop",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/ZortosShell.zip",
+      "AppExe": "ZortosShell\\bin\\shell\\notsus.exe",
+      "AppArguments": "-Desktop",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Desktop With Background and Start menu support"
+    },
+    {
+      "AppName": "Arcade", 
+      "AppImage": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico",
+      "AppDescription": "Arcade is a tool in picteon.dev which can be used using the black desert GFN method.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Arcade.exe",
+      "AppExe": "Arcade.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded Arcade" 
+    },
+    {
+      "AppName": "Explorer ++",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/opened_folder_480px.png",
+      "AppDescription": "Explorer++ is a free file manager for Windows. It features a familiar dual-pane interface and a host of powerful tools.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Explorer%2B%2B.exe",
+      "AppExe": "China.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Explorer++"
+    },
+    {
+      "AppName": "7-Zip",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/7zip.png",
+      "AppDescription": "7-zip is a free file archiver for Windows.",
+      "AppGFNIssues": "You can randomly Crash due to UADML",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://picteon.dev/files/7-Zip.zip",
+      "AppExe": "\\7-Zip\\7zFM.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded 7-Zip"
+    },
+    {
+      "AppName": "Proccess Hacker",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/system_task_480px.png",
+      "AppDescription": "Procces Hacker is a free and open-source process viewer and manager for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/ProcessHacker.zip",
+      "AppExe": "\\ProcessHacker\\ProcessHacker.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Proccess Hacker"
+    },
+    {
+      "AppName": "HxD",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/New%20Project%20(3)%20(1).png",
+      "AppDescription": "Zortos Unzipper is a free and open-source unzipper for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://cdn.discordapp.com/attachments/1054445358303948922/1054449847375237171/HxD.exe",
+      "AppExe": "HxD.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded HxD"
+    },
+    {
+      "AppName": "Notepad 2",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/notepad_240px.png",
+      "AppDescription": "Notepad 2 is a free and open-source text editor for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Notepad2x64.exe",
+      "AppExe": "Notepad2x64.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Notepad 2"
+    },
+    {
+      "AppName": "Discord",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/discord_480px.png",
+      "AppDescription": "Discord is a free and open-source voice and text chat app for Windows. (ONLY Works on GFN)",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://dl.discordapp.net/distro/app/stable/win/x86/1.0.9007/DiscordSetup.exe",
+      "AppExe": "C:\\Users\\kiosk\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk",
+      "AppArguments": "",
+      "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Discord"
+    },
+    {
+      "AppName": "Cmd",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/cmdprompt.png",
+      "AppDescription": "CMD is a command prompt for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/NotCMDNvidia.exe",
+      "AppExe": "cmdpwetaa.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded CMD UwU"
+    },
+    {
+      "AppName": "Anydesk",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/anydesk_240px.png",
+      "AppDescription": "Anydesk is a free remote desktop app for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/AnyDesk.exe",
+      "AppExe": "AnyPwet.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Anydesk"
+    },
+    {
+      "AppName": "Parsec",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Parsec_512px.png",
+      "AppDescription": "Parsec is a free remote desktop app for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Parsec%20%282%29.zip",
+      "AppExe": "Parsec\\parsecd.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Parsec"
+    },
+    {
+      "AppName": "Firefox",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/fox_480px.png",
+      "AppDescription": "Firefox is a free web browser for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Firefox.zip",
+      "AppExe": "Firefox\\runthis.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Firefox"
+    },
+    {
+      "AppName": "LibreWolf",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/fox_480px.png",
+      "AppDescription": "LibreWolf is a free web browser for Windows.",
+      "AppGFNIssues": "If you download something it will not work and crash.",
+      "AppGFNStatus": "Crash",
+      "AppDownloadUrl": "https://gitlab.com/librewolf-community/browser/windows/uploads/a9d86b83d8e66b9c3c75a0c2221aecdd/librewolf-105.0.1-1.en-US.win64-portable.zip",
+      "AppExe": "librewolf-105.0.1\\LibreWolf-Portable.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded LibreWolf"
+    },
+    {
+      "AppName": "Qbittorent",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/qBittorrent-1.png",
+      "AppDescription": "Qbittorent is a free torrent client for Windows.",
+      "AppGFNIssues": "There are some random crashes when downloading (Rare).",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://picteon.dev/files/qBitTorrent.zip",
+      "AppExe": "biter\\biter.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Qbittorent"
+    },
+    {
+      "AppName": "FDM",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/FDM.png",
+      "AppDescription": "Free Download Manager is a powerful, easy-to-use and absolutely free download accelerator and manager. Moreover, FDM is 100% safe, open-source software distributed under GPL license. Free Download Manager accelerates all types of downloads (files, video, torrents). It's a smart and fast internet download manager for Windows and macOS.",
+      "AppGFNIssues": "n/a",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Launchers/FDM.zip",
+      "AppExe": "FDM/fdm.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/29/2022\n-------------------------------\nAdded FDM"
+    },
+    {
+      "AppName": "Spotify",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Spotify.png",
+      "AppDescription": "Spotify is a digital music, podcast, and video service that gives you access to millions of songs and other content from creators all over the world.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/Spotify.zip",
+      "AppExe": "\\Spotify\\Spotify.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/29/2022\n-------------------------------\nAdded Spotify"
+    },
+    {
+      "AppName": "RetroArch",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Retroarch-logo.jpg",
+      "AppDescription": "RetroArch is a free emulator for Windows.",
+      "AppGFNIssues": "none",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Emulators/RetroArch-Win64.zip",
+      "AppExe": "FDM\\fdm.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded RetroArch"
+    },
+    {
+      "AppName": "Citra",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/Citra_Logo.png",
+      "AppDescription": "Citra is a Nintendo 3DS emulator for Windows.",
+      "AppGFNIssues": "File open window crashes gfn drag and drop your roms will fix it",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Emulators/Citra.zip",
+      "AppExe": "Citra\\nightly-mingw\\citra-qt.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Citra"
+    },
+    {
+      "AppName": "Cemu",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/cemu.png",
+      "AppDescription": "Cemu is a Wii U emulator for Windows.",
+      "AppGFNIssues": "File open window crashes gfn drag and drop your roms will fix it",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Emulators/Citra.zip",
+      "AppExe": "cemu_1.27.1\\Cemu.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Cemu"
+    },
+    {
+      "AppName": "Yuzu",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/yuzu_tranparant.png",
+      "AppDescription": "Yuzu is a Nintendo Switch emulator for Windows. (Prod.keys are preinstalled in the emulator)",
+      "AppGFNIssues": "File open window crashes gfn drag and drop your roms will fix it",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Emulators/yuzu.zip",
+      "AppExe": "yuzu\\yuzu-windows-msvc\\yuzu.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Yuzu"
+    },
+    {
+      "AppName": "Dolphin",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/720px-Dolphin-logo.svg.png",
+      "AppDescription": "Dolphin is a Nintendo Gamecube/Wii emulator for Windows.",
+      "AppGFNIssues": "File open window crashes gfn drag and drop your roms will fix it",
+      "AppGFNStatus": "Unsafe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Emulators/Dolphin-x64.zip",
+      "AppExe": "Dolphin-x64\\Dolphin.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Dolphin"
+    },
+    {
+      "AppName": "Ctrl + tab",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/ahk.png",
+      "AppDescription": "It is what the app name says",
+      "AppGFNIssues": "n/a",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://picteon.dev/files/CtrlTab%20%282%29.exe",
+      "AppExe": "ctrl_tab.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "11/20/2022\n-------------------------------\nAdded Ctrl + tab"
+    },
+    {
+      "AppName": "Kdenlive",
+      "AppImage": "https://raw.githubusercontent.com/zortos293/Cloudforce-Revamped-Resources/Dev/Resources/512px-Kdenlive-logo.svg.png",
+      "AppDescription": "Kdenlive is a video editor that is OPEN SOURCE!!",
+      "AppGFNIssues": "n/a",
+      "AppGFNStatus": "Safe",
+      "AppDownloadUrl": "https://files.zortos.me/Files/Apps/kdenlive.zip",
+      "AppExe": "kdenlive-22.12.2_standalone\\bin\\kdenlive.exe",
+      "AppArguments": "",
+      "AppUpdateLog": "2/14/2023\n-------------------------------\nAdded Kdenlive"
+    }
+  
+  
+
+    ]
+}
