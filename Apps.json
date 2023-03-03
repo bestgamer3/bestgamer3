@@ -105,8 +105,8 @@
       "AppDescription": "Anydesk is a free remote desktop app for Windows.",
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
-      "AppDownloadUrl": "https://store9.gofile.io/download/4caf913c-d2db-4f63-872c-dcb090dce09e/lightshot.zip",
-      "AppExe": "lightshot.exe",
+      "AppDownloadUrl": "https://store9.gofile.io/download/b327bb56-61f2-461e-8a1e-b3ff2fa94049/WinRAR.zip",
+      "AppExe": "\\WinRAR\\WinRAR.exe",
       "AppArguments": "",
       "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Anydesk"
     },
