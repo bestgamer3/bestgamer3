@@ -123,7 +123,7 @@
         "GameDescription": "Winrar just for testing",
         "GameSize": "360 MB",
         "GameDownloadURL": "https://store2.gofile.io/download/b613b343-e4cf-473d-a9d9-3a9a307661f8/WinRAR.rar", 
-        "GameExe": "Winrar\\Winrar.exe", 
+        "GameExe": "WinRAR\\WinRAR.exe", 
         "GameArguments": "",
         "GameUpdateLog": "12/1/2022\n-------------------------------\nAdded Winrar",
         "GamePaid": false
