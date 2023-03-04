@@ -43,11 +43,11 @@
             "GameSize" : "17.1 GB"
         },
 	{
-            "AppName": "Arcade",
-            "AppImage": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico"
-            "AppDownloadUrl": "https://picteon.dev/files/Arcade.exe",
+            "Gamename": "Arcade",
+            "GamePoster": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico"
+            "GameDownloadUrl": "https://picteon.dev/files/Arcade.exe",
             "Gamelaunch" : "Prodeus\\Prodeus.exe",
-            "AppExe": "Arcade.exe",
+            "GameExe": "Arcade.exe",
             "GameSize" : "10"
         },
         {
