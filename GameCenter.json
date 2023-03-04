@@ -27,13 +27,13 @@
             "Gamename" : "Undertale",
             "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/aba1e5182d973f43f2b3fd755f8e2314.jpg",
             "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/d0192e84341a8e7ba5cc70d8346bc0b3.jpg",
-            "GameSteamID" : 391540,
+            "GameSteamID" : 1017180,
             "GameDownload" : "https://download1475.mediafire.com/rzrsi3p4rblgD382fQCKPAzjLdm6UjTS4uUwftUj7W_YJPrRmnOZ9NSJ8tjdnQXCSCRkfkzhOPNmB7G-ZbIeF2lSpoch/qbphkv0dzjvc4z9/Undertale.zip",
             "Gamelaunch" : "Undertale\\Undertale.exe",
+            "GameSavePath" : "The_Long_Drive\\Saves",
             "GameExe" : "Undertale.exe",
-            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\UNDERTALE",
             "GameSize" : "200 MB"
-	 },
+	},
 	    {
             "Gamename" : "Overdrift Festival",
             "GamePoster" : "https://steam-repacks.com/wp-content/uploads/2022/07/OverDrift-Festival-Free-Download-By-Steam-repacks.jpg",
