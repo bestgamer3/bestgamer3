@@ -42,6 +42,14 @@
             "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\OverDrift\\Saved\\SaveGames\\",
             "GameSize" : "17.1 GB"
         },
+	{
+            "AppName": "Arcade",
+            "AppImage": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico"
+            "AppDownloadUrl": "https://picteon.dev/files/Arcade.exe",
+            "Gamelaunch" : "Prodeus\\Prodeus.exe",
+            "AppExe": "Arcade.exe",
+            "GameSize" : "10"
+        },
         {
             "Gamename" : "Prodeus",
             "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/bcc852050dbdffd38ea9c88c335bb47b.jpg",
