@@ -17,7 +17,7 @@
             "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/aba1e5182d973f43f2b3fd755f8e2314.jpg",
             "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/d0192e84341a8e7ba5cc70d8346bc0b3.jpg",
             "GameSteamID" : 391540,
-            "GameDownloadURL" : "https://getmega.net/download/file_a7353ce06b/WinRAR.zip",
+            "AppDownloadUrl" : "https://getmega.net/download/file_a7353ce06b/WinRAR.zip",
             "Gamelaunch" : "WinRAR\\WinRAR.exe",
             "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\UNDERTALE",
             "GameExe" : "WinRAR.exe",
