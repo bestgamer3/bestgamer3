@@ -8,7 +8,7 @@
             "GameDownload" : "gamerdrive1:Undertale",
             "Gamelaunch" : "Undertale\\Undertale.exe",
             "GameExe" : "Undertale.exe",
-            "GameSavePath" : "%LOCALAPPDATA%\UNDERTALE",
+            "GameSavePath" : "%LOCALAPPDATA%\\UNDERTALE",
             "GameSize" : "120 MB"
         }
     ]
