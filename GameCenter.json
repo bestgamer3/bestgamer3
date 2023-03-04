@@ -33,7 +33,7 @@
             "GameExe" : "Undertale.exe",
             "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\UNDERTALE",
             "GameSize" : "200 MB"
-        },
+	 },
 	    {
             "Gamename" : "Overdrift Festival",
             "GamePoster" : "https://steam-repacks.com/wp-content/uploads/2022/07/OverDrift-Festival-Free-Download-By-Steam-repacks.jpg",
