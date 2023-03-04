@@ -1,15 +1,226 @@
 {
     "crack" :[
         {
-            "Gamename" : "Undertale",
-            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/aba1e5182d973f43f2b3fd755f8e2314.jpg",
-            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/b65f2ecd2900ba6ae49a14d9c4b16fb4.jpg",
-            "GameSteamID" : 391540,
-            "GameDownload" : "gamerdrive1:Undertale",
-            "Gamelaunch" : "Undertale\\Undertale.exe",
-            "GameExe" : "Undertale.exe",
-            "GameSavePath" : "%LOCALAPPDATA%\\UNDERTALE",
-            "GameSize" : "120 MB"
+            "Gamename" : "ULTRAKILL",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/4c1b274e8befa9cbcd35ae8bdd5f1085.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/fac99c77695b5655eefadf78498b8430.jpg",
+            "GameSteamID" : 1229490,
+            "GameDownload" : "Zortosdrive1:ULTRAKILL",
+            "Gamelaunch" : "ULTRAKILL\\ULTRAKILL.exe",
+            "GameSavePath" : "ULTRAKILL\\Saves",
+            "GameExe" : "ULTRAKILL.exe",
+            "GameSize" : "1.06 GB"
+            
+        },
+        {
+            "Gamename" : "The Long Drive",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/6ef99578565963c9308021f4cc9575c5.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/34aba6f934aa1a8de795d088a6875d28.jpg",
+            "GameSteamID" : 1017180,
+            "GameDownload" : "Zortosdrive1:The_Long_Drive",
+            "Gamelaunch" : "The_Long_Drive\\TheLongDrive.exe",
+            "GameSavePath" : "The_Long_Drive\\Saves",
+            "GameExe" : "TheLongDrive.exe",
+            "GameSize" : "0.43 GB"
+            
+        },
+        {
+            "Gamename" : "Overdrift Festival",
+            "GamePoster" : "https://steam-repacks.com/wp-content/uploads/2022/07/OverDrift-Festival-Free-Download-By-Steam-repacks.jpg",
+            "GameBanner" : "https://cdn.akamai.steamstatic.com/steam/apps/1273440/header.jpg",
+            "GameSteamID" : 1273440,
+            "GameDownload" : "Zortosdrive1:Turbo_Overkill",
+            "Gamelaunch" : "Prodeus\\Prodeus.exe",
+            "GameExe" : "Prodeus.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\OverDrift\\Saved\\SaveGames\\",
+            "GameSize" : "17.1 GB"
+            
+        },
+        {
+            "Gamename" : "Prodeus",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/bcc852050dbdffd38ea9c88c335bb47b.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/82f585baeae099c070aba8457633ca21.jpg",
+            "GameSteamID" : 964800,
+            "GameDownload" : "Zortosdrive1:Prodeus",
+            "Gamelaunch" : "Prodeus\\Prodeus.exe",
+            "GameExe" : "Prodeus.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\LocalLow\\BoundingBoxSoftware\\Prodeus\\",
+            "GameSize" : "17.1 GB"
+            
+        },
+        {
+            "Gamename" : "Half Life 2 Complete Edition",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/8053519398a89e3d928132298251e0ec.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/7812d18c11eba4daf3953e61cffd4028.jpg",
+            "GameSteamID" :  220,
+            "GameDownload" : "Zortosdrive1:Half-Life_2_Complete_Edition",
+            "Gamelaunch" : "Half-Life_2_Complete_Edition\\hl2.exe",
+            "GameExe" : "hl2.exe",
+            "GameSavePath" : "hl2\\save",
+            "GameSize" : "1.28 GB"
+            
+        },
+        {
+            "Gamename" : "Marvels Guardians of the Galaxy",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/5910c076bd741891fbc8cd3525348d46.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/c4a55894b71e51a90b84a28c1b946d2b.jpg",
+            "GameSteamID" :  1088850,
+            "GameDownload" : "Zortosdrive1:Marvels_Guardians_of_the_Galaxy",
+            "Gamelaunch" : "Marvels_Guardians_of_the_Galaxy\\bin\\gotg.exe",
+            "GameExe" : "gotg.exe",
+            "GameSavePath" : "C:\\Users\\Public\\Documents\\EMPRESS\\1088850\\",
+            "GameSize" : "70 GB"
+            
+        },
+        {
+            "Gamename" : "Overwatch 2",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/80bf407312035ac647db895d9782ea26.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/7c4797ad736d4598201ba34250d17c99.jpg",
+            "GameSteamID" :  0,
+            "GameDownload" : "Zortosdrive1:Overwatch_2",
+            "Gamelaunch" : "Overwatch_2\\_retail_\\Overwatch.exe",
+            "GameExe" : "Overwatch.exe",
+            "GameSavePath" : "C:\\Users\\Public\\Documents\\EMPRESS\\",
+            "GameSize" : "27 GB"
+            
+        },
+        {
+            "Gamename" : "Thief Simulator",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/7c01802bb3674e5af58547b0395bcb2d.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/5546524ac938e99381090b48365c0740.jpg",
+            "GameSteamID" : 704850,
+            "GameDownload" : "Zortosdrive1:Thief_Simulator",
+            "Gamelaunch" : "Thief_Simulator\\thief.exe",
+            "GameExe" : "thief.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\LocalLow\\Noble Muffins\\Thief Simulator\\",
+            "GameSize" : "6.62 GB"
+            
+        },
+        {
+            "Gamename" : "ONE PIECE ODYSSEY",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/4d087d16dc445c88627f14ca3cc165cb.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/7bf68e320d0141521df9b84b427e485b.jpg",
+            "GameSteamID" : 814000,
+            "GameDownload" : "Zortosdrive1:ONE_PIECE_ODYSSEY",
+            "Gamelaunch" : "ONE_PIECE_ODYSSEY\\odyssey.exe",
+            "GameExe" : "odyssey.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\Bandai Namco Entertainment\\ONE PIECE ODYSSEY\\Saved\\SaveGames\\",
+            "GameSize" : "30.62 GB"
+        },
+        {
+            "Gamename" : "Grand Theft Auto V",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/a94eef54dd59424283d4c39b3f2248c7.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/e6293d6df91c1f64f6ce1d86c8be87e4.jpg",
+            "GameSteamID" : 271590,
+            "GameDownload" : "Zortosdrive1:fivem1",
+            "Gamelaunch" : "gta\\Downloader.bat",
+            "GameExe" : "Downloader.bat",
+            "GameSavePath" : "%USERPROFILE%\\Saved Games\\CitizenFX\\GTA5\\",
+            "GameSize" : "95 GB"
+        },
+        {
+            "Gamename" : "Dying Light 2",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/a75fcb7222ddccf84b49f3b3efec8d48.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/ebc1d25aa67e67b69022d72951d7ae8a.jpg",
+            "GameSteamID" : 534380,
+            "GameDownload" : "Zortosdrive1:Dying_Light_2",
+            "Gamelaunch" : "Dying_Light_2\\ph\\work\\bin\\x64\\DyingLightGame_x64_rwdi.exe",
+            "GameExe" : "DyingLightGame_x64_rwdi.exe",
+            "GameSavePath" : "ph\\work\\bin\\x64\\SteamData\\",
+            "GameSize" : "60 GB"
+        },
+        {
+            "Gamename" : "The Quarry",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/c117d3dfaa145bbf3feca49ab72daca2.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/032910511bf4ecb67bf31ba448278419.jpg",
+            "GameSteamID" : 1577120,
+            "GameDownload" : "Zortosdrive1:The_Quarry",
+            "Gamelaunch" : "The_Quarry\\SmartSteamLoader_x64.exe",
+            "GameExe" : "SmartSteamLoader_x64.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\TheQuarry\\",
+            "GameSize" : "47 GB"
+        },
+        {
+            "Gamename" : "Dead Space",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/f891e4b484284a04c56f08c507d731a6.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/4f4adcbf8c6f66dcfc8a3282ac2bf10a.jpg",
+            "GameSteamID" : 17470,
+            "GameDownload" : "Zortosdrive1:Dead_Space",
+            "Gamelaunch" : "Dead_Space\\Dead Space.exe",
+            "GameExe" : "Dead Space.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\TheQuarry\\",
+            "GameSize" : "8.73 GB"
+        },
+        {
+            "Gamename" : "Dead Space 2",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/e756b6273eca1f773cfe6e6ed612c664.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/24e01830d213d75deb99c22b9cd91ddd.jpg",
+            "GameSteamID" : 47780,
+            "GameDownload" : "Zortosdrive1:Dead_Space_2",
+            "Gamelaunch" : "Dead_Space_2\\deadspace2.exe",
+            "GameExe" : "deadspace2.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\TheQuarry\\",
+            "GameSize" : "10.81 GB"
+        },
+        {
+            "Gamename" : "Dead Space 3",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/abe28f78fe096c086384706cddc94de4.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/032910511bf4ecb67bf31ba448278419.jpg",
+            "GameSteamID" : 1238060,
+            "GameDownload" : "Zortosdrive1:Dead_Space_3",
+            "Gamelaunch" : "Dead_Space_3\\deadspace3.exe",
+            "GameExe" : "deadspace3.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\TheQuarry\\",
+            "GameSize" : "12.1 GB"
+        },
+        {
+            "Gamename" : "Elden Ring",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/f67ce25bb06e710ed8cca26bf7958d06.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero/8a6adfadeaa80359186cb80ce7097ddf-fakepng.png",
+            "GameSteamID" : 1245620,
+            "GameDownload" : "Zortosdrive1:Elden_Ring",
+            "Gamelaunch" : "Elden_Ring\\Game\\eldenring.exe",
+            "GameExe" : "eldenring.exe",
+            "GameSavePath" : "%USERPROFILE%\\AppData\\Roaming\\EldenRing\\",
+            "GameSize" : "36 GB"
+        },
+        {
+            "Gamename" : "Goat Simulator 3",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/fcd6fd799ae3adaefcc3a8f849f3fc81.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/899fcb32251e64910ddfdb9ed88338bc.jpg",
+            "GameSteamID" : 0,
+            "GameDownload" : "Zortosdrive1:Goat_Simulator_3",
+            "Gamelaunch" : "Goat_Simulator_3\\Launcher.bat",
+            "GameExe" : "Launcher.bat",
+            "GameSavePath" : "%USERPROFILE%\\appdata\\Local\\Goat2\\Saved\\SaveGames\\",
+            "GameSize" : "7 GB"
+        },
+        {
+            "Gamename" : "God Of War",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/5855660034a74cfe0e5fc8d57d17f4ac.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/33e70269806c88720e2d89ed1d3f1be3.jpg",
+            "GameSteamID" : 1593500,
+            "GameDownload" : "Zortosdrive1:God_Of_War",
+            "Gamelaunch" : "God_Of_War\\GoW.exe",
+            "GameExe" : "GoW.exe",
+            "GameSavePath" : "%USERPROFILE%\\Saved Games\\God of War\\",
+            "GameSize" : "49 GB"
+        },
+	{
+            "Gamename" : "Atmoic Heart",
+            "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/d667282afbb5f942498fdfc512b93d1f.jpg",
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/hero_thumb/e784c77cfa297508fb13340fce385105.jpg",
+            "GameSteamID" : 668580,
+            "GameDownload" : "Zortosdrive1:Atomic_Heart",
+            "Gamelaunch" : "Atomic_Heart\\AtomicHeart.exe",
+            "GameExe" : "AtomicHeart.exe",
+            "GameSavePath" : "%USERPROFILE%\\appdata\\Local\\AtomicHeart\\Saved\\",
+            "GameSize" : "80 GB"
         }
+
+
+
+
+
     ]
 }
