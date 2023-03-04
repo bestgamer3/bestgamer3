@@ -13,13 +13,16 @@
             
         },
         {
-            "Gamename" : "Parsec",
+            "Gamename" : "Undertale",
             "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/aba1e5182d973f43f2b3fd755f8e2314.jpg",
-            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/d0192e84341a8e7ba5cc70d8346bc0b3.jpg",
-            "AppDownloadUrl" : "https://pixeldrain.com/api/file/8Jtrwhhz?download",
-            "GameExe" : "parsecd.exe",
-            "GameSize" : "6 MB"
-	},   	
+            "GameBanner" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/aba1e5182d973f43f2b3fd755f8e2314.jpg",
+            "GameSteamID" : 74780,
+            "GameDownloadURL" : "https://download1475.mediafire.com/evmptdcm9k9gUJBf_kS3ICQikZUMg5Jlklw5DDl3UAkbrmDENOb3b98vaogAzINoW4DKIgFzCsUvYORrWO9aIkKhlq-W/qbphkv0dzjvc4z9/Undertale.zip",
+            "Gamelaunch" : "Undertale.exe",
+            "GameSavePath" : "",
+            "GameExe" : "",
+            "GameSize" : "200 MB"
+	},   
         {
             "Gamename" : "The Long Drive",
             "GamePoster" : "https://cdn2.steamgriddb.com/file/sgdb-cdn/thumb/6ef99578565963c9308021f4cc9575c5.jpg",
@@ -41,14 +44,6 @@
             "GameExe" : "Prodeus.exe",
             "GameSavePath" : "%USERPROFILE%\\AppData\\Local\\OverDrift\\Saved\\SaveGames\\",
             "GameSize" : "17.1 GB"
-        },
-	{
-            "Gamename": "Arcade",
-            "GamePoster": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico"
-            "GameDownloadUrl": "https://picteon.dev/files/Arcade.exe",
-            "Gamelaunch" : "Prodeus\\Prodeus.exe",
-            "GameExe": "Arcade.exe",
-            "GameSize" : "10"
         },
         {
             "Gamename" : "Prodeus",
