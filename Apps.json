@@ -12,15 +12,15 @@
       "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Desktop With Background and Start menu support"
     },
     {
-      "AppName": "T.F Game Launcher", 
+      "AppName": "TF Game Launcher", 
       "AppImage": "https://raw.githubusercontent.com/bestgamer3/bestgamer3/main/TF.png",
-      "AppDescription": "T.F game launcher is a brand new app that lets you download and play your games",
+      "AppDescription": "TF game launcher is a brand new app that lets you download and play your games",
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
       "AppDownloadUrl": "https://getmega.net/download/file_be6ee1cb81/ID%20Game%20Launcher.zip",
       "AppExe": "\\ID Game Launcher\\ID_Game_Launcher.exe",
       "AppArguments": "",
-      "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded T.F Game Launcher" 
+      "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded TF Game Launcher" 
     },
     {
       "AppName": "Explorer ++",
