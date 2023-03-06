@@ -12,15 +12,15 @@
       "AppUpdateLog": "11/15/2022\n-------------------------------\nAdded Desktop With Background and Start menu support"
     },
     {
-      "AppName": "Arcade", 
+      "AppName": "T.F Game Launcher", 
       "AppImage": "https://raw.githubusercontent.com/afonsosousah/arcade/main/defaultLogoBlack.ico",
-      "AppDescription": "Arcade is a tool in picteon.dev which can be used using the black desert GFN method.",
+      "AppDescription": "T.F game launcher is a brand new app that lets you download and play your games",
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
-      "AppDownloadUrl": "https://picteon.dev/files/Arcade.exe",
-      "AppExe": "Arcade.exe",
+      "AppDownloadUrl": "https://download1075.mediafire.com/qozwg9s7qqtgAI4Cr0p3quTxyfwAOLHFVL3f49DEgSUK1h2RLpEF_UPIrJjFKsR13CVrfNji0L4k9-Iv3eNsFq60_d30/4ee9k9ojtw5e59b/T.F+Game+Launcher.zip",
+      "AppExe": "\\T.F Game Launcher\\ID_Game_Launcher.exe",
       "AppArguments": "",
-      "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded Arcade" 
+      "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded T.F Game Launcher" 
     },
     {
       "AppName": "Explorer ++",
