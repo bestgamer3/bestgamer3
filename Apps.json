@@ -18,7 +18,7 @@
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
       "AppDownloadUrl": "https://getmega.net/download/file_be6ee1cb81/ID%20Game%20Launcher.zip",
-      "AppExe": "T.F Game Launcher\\ID_Game_Launcher.exe",
+      "AppExe": "\\ID Game Launcher\\ID_Game_Launcher.exe",
       "AppArguments": "",
       "AppUpdateLog": "11/18/2022\n-------------------------------\nAdded T.F Game Launcher" 
     },
