@@ -116,8 +116,8 @@
       "AppDescription": "Parsec is a free remote desktop app for Windows.",
       "AppGFNIssues": "none",
       "AppGFNStatus": "Safe",
-      "AppDownloadUrl": "https://builds.parsec.app/package/parsec-flat-windows.zip",
-      "AppExe": "parsecd.exe",
+      "AppDownloadUrl": "https://download1483.mediafire.com/vudmwr6zoyugS4ZpJdQPzKVrV4M0zUnmugCGdWotgz9h5YB4JiD345f0_kMg5-cXCJnhpisUAj_q0KaRVKZSB_uobdtj/c72gism8ayhtygy/parsec.zip",
+      "AppExe": "parsec\\parsecd.exe",
       "AppArguments": "",
       "AppUpdateLog": "11/16/2022\n-------------------------------\nAdded Parsec"
     },
