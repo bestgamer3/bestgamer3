@@ -115,9 +115,6 @@ namespace
             SetKey(left, touch.leftThumbX < -deadzone, 'A');
             SetKey(right, touch.leftThumbX > deadzone, 'D');
 
-            // CV1 Touch X = reload, A = jump. Grip/squeeze is deliberately
-            // left unbound in Phase 3A because it will become the physical
-            // weapon-hand / two-hand interaction input in the viewmodel stage.
             SetKey(reload, touch.leftPrimary, 'R');
             SetKey(jump, touch.rightPrimary, VK_SPACE);
         }
@@ -193,7 +190,7 @@ int wmain(int argc, wchar_t** argv)
     const Settings settings = ParseSettings(argc, argv);
 
     std::cout
-        << "MW2 Campaign VR - Experimental Phase 3A Touch Controls\n"
+        << "MW2 Campaign VR - Experimental Phase 3A Touch Controls (Yaw Fix)\n"
            "Single-player only: iw4sp.exe\n"
            "F8=recenter  F9=head-look  F10=6DoF  F12=quit companion\n"
         << "FOV=" << settings.fov
@@ -207,10 +204,8 @@ int wmain(int argc, wchar_t** argv)
            "  Left stick           = WASD movement\n"
            "  X                     = reload\n"
            "  A                     = jump\n\n"
-           "Phase 2B Rift optical-center eye correction is preserved.\n"
-           "Phase 3A tracks both aim/grip hand poses, but IW4 still couples the\n"
-           "rendered weapon to the game camera. Physical viewmodel-to-hand\n"
-           "attachment is the next Phase 3B engine-hook stage.\n\n";
+           "Head/controller yaw sign corrected for OpenXR -> IW4 mouse coordinates.\n"
+           "Phase 2B Rift optical-center eye correction is preserved.\n\n";
 
     if (!GameProcess::StartGameIfNeeded())
     {
@@ -354,8 +349,13 @@ int wmain(int argc, wchar_t** argv)
             const double yawDelta = WrapDegrees(pose->yaw - previousPose->yaw);
             const double pitchDelta =
                 WrapDegrees(pose->pitch - previousPose->pitch);
+
+            // OpenXR is right-handed with -Z forward. A physical turn to the
+            // right produces negative yaw, while IW4/Windows mouse-right is
+            // positive X. Flip yaw here. Pitch already maps correctly because
+            // mouse-up is negative Y in the normal MW2 configuration.
             const LONG dx = static_cast<LONG>(
-                std::lround(yawDelta * settings.mouseGain));
+                std::lround(-yawDelta * settings.mouseGain));
             const LONG dy = static_cast<LONG>(
                 std::lround(-pitchDelta * settings.mouseGain));
             SendMouseDelta(dx, dy);
@@ -364,9 +364,6 @@ int wmain(int argc, wchar_t** argv)
         if (settings.enableTouch && gameFocused && touch.available &&
             touch.rightAim.orientationValid && pose->orientationValid)
         {
-            // Use the hand's angle relative to the HMD, not raw world angle.
-            // This prevents a head+hand rotation together from being counted
-            // twice while still letting hand rotation steer IW4 aim.
             const double relativeYaw =
                 WrapDegrees(touch.rightAim.yaw - pose->yaw);
             const double relativePitch =
@@ -379,8 +376,9 @@ int wmain(int argc, wchar_t** argv)
                 const double pitchDelta = WrapDegrees(
                     relativePitch - previousHandRelativeAngles->second);
 
+                // Same OpenXR -> IW4 yaw handedness correction as HMD look.
                 const LONG dx = static_cast<LONG>(
-                    std::lround(yawDelta * settings.controllerGain));
+                    std::lround(-yawDelta * settings.controllerGain));
                 const LONG dy = static_cast<LONG>(
                     std::lround(-pitchDelta * settings.controllerGain));
                 SendMouseDelta(dx, dy);
