@@ -1,3 +1,4 @@
 LIBRARY MW2VRViewmodelHook
 EXPORTS
     MW2VR_InstallHook=_MW2VR_InstallHook@4
+    MW2VR_InstallHandsFilter=_MW2VR_InstallHandsFilter@4
