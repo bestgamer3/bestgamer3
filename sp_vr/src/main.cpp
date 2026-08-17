@@ -190,9 +190,9 @@ int wmain(int argc, wchar_t** argv)
     const Settings settings = ParseSettings(argc, argv);
 
     std::cout
-        << "MW2 Campaign VR - Experimental Phase 3A Touch Controls (Yaw Fix)\n"
+        << "MW2 Campaign VR - Experimental Phase 3A Horizontal Tracking Fix\n"
            "Single-player only: iw4sp.exe\n"
-           "F8=recenter  F9=head-look  F10=6DoF  F12=quit companion\n"
+           "F6=flip yaw  F7=flip lean X  F8=recenter  F9=head-look  F10=6DoF  F12=quit\n"
         << "FOV=" << settings.fov
         << "  head gain=" << settings.mouseGain
         << "  controller gain=" << settings.controllerGain
@@ -204,7 +204,10 @@ int wmain(int argc, wchar_t** argv)
            "  Left stick           = WASD movement\n"
            "  X                     = reload\n"
            "  A                     = jump\n\n"
-           "Head/controller yaw sign corrected for OpenXR -> IW4 mouse coordinates.\n"
+           "CV1 horizontal correction defaults:\n"
+           "  rotational yaw uses direct OpenXR -> MW2 mouse sign\n"
+           "  physical left/right 6DoF translation uses inverted IW4 right-axis sign\n"
+           "Use F6 or F7 to toggle either convention live if the active Oculus runtime differs.\n"
            "Phase 2B Rift optical-center eye correction is preserved.\n\n";
 
     if (!GameProcess::StartGameIfNeeded())
@@ -237,6 +240,13 @@ int wmain(int argc, wchar_t** argv)
     bool camera6DofAvailable = false;
     bool recenterRequested = true;
 
+    // The Oculus CV1 runtime and IW4 mouse/camera coordinates use different
+    // conventions depending on whether we are mapping rotation or refdef
+    // translation. These defaults match the latest CV1 test report, while F6/F7
+    // make either axis reversible immediately without another binary rebuild.
+    bool invertYaw = false;
+    bool invertLateralTranslation = true;
+
     std::optional<HeadPose> previousPose;
     std::optional<HeadPose> centerPose;
     std::optional<std::pair<double, double>> previousHandRelativeAngles;
@@ -247,6 +257,8 @@ int wmain(int argc, wchar_t** argv)
     auto nextWindowRefresh = std::chrono::steady_clock::now();
     HWND gameWindow = nullptr;
 
+    bool lastF6 = false;
+    bool lastF7 = false;
     bool lastF8 = false;
     bool lastF9 = false;
     bool lastF10 = false;
@@ -266,11 +278,31 @@ int wmain(int argc, wchar_t** argv)
             nextWindowRefresh = now + std::chrono::seconds(1);
         }
 
+        const bool f6 = (GetAsyncKeyState(VK_F6) & 0x8000) != 0;
+        const bool f7 = (GetAsyncKeyState(VK_F7) & 0x8000) != 0;
         const bool f8 = (GetAsyncKeyState(VK_F8) & 0x8000) != 0;
         const bool f9 = (GetAsyncKeyState(VK_F9) & 0x8000) != 0;
         const bool f10 = (GetAsyncKeyState(VK_F10) & 0x8000) != 0;
         const bool f12 = (GetAsyncKeyState(VK_F12) & 0x8000) != 0;
 
+        if (f6 && !lastF6)
+        {
+            invertYaw = !invertYaw;
+            recenterRequested = true;
+            previousHandRelativeAngles.reset();
+            std::cout
+                << "Horizontal rotational yaw direction: "
+                << (invertYaw ? "INVERTED" : "DIRECT") << ".\n";
+        }
+        if (f7 && !lastF7)
+        {
+            invertLateralTranslation = !invertLateralTranslation;
+            recenterRequested = true;
+            game.ClearHeadTranslation();
+            std::cout
+                << "Horizontal 6DoF lean/translation direction: "
+                << (invertLateralTranslation ? "INVERTED" : "DIRECT") << ".\n";
+        }
         if (f8 && !lastF8)
         {
             recenterRequested = true;
@@ -304,6 +336,8 @@ int wmain(int argc, wchar_t** argv)
             std::cout << "Closing MW2 Campaign VR companion.\n";
             break;
         }
+        lastF6 = f6;
+        lastF7 = f7;
         lastF8 = f8;
         lastF9 = f9;
         lastF10 = f10;
@@ -350,12 +384,9 @@ int wmain(int argc, wchar_t** argv)
             const double pitchDelta =
                 WrapDegrees(pose->pitch - previousPose->pitch);
 
-            // OpenXR is right-handed with -Z forward. A physical turn to the
-            // right produces negative yaw, while IW4/Windows mouse-right is
-            // positive X. Flip yaw here. Pitch already maps correctly because
-            // mouse-up is negative Y in the normal MW2 configuration.
+            const double yawSign = invertYaw ? -1.0 : 1.0;
             const LONG dx = static_cast<LONG>(
-                std::lround(-yawDelta * settings.mouseGain));
+                std::lround(yawDelta * yawSign * settings.mouseGain));
             const LONG dy = static_cast<LONG>(
                 std::lround(-pitchDelta * settings.mouseGain));
             SendMouseDelta(dx, dy);
@@ -376,9 +407,9 @@ int wmain(int argc, wchar_t** argv)
                 const double pitchDelta = WrapDegrees(
                     relativePitch - previousHandRelativeAngles->second);
 
-                // Same OpenXR -> IW4 yaw handedness correction as HMD look.
+                const double yawSign = invertYaw ? -1.0 : 1.0;
                 const LONG dx = static_cast<LONG>(
-                    std::lround(-yawDelta * settings.controllerGain));
+                    std::lround(yawDelta * yawSign * settings.controllerGain));
                 const LONG dy = static_cast<LONG>(
                     std::lround(-pitchDelta * settings.controllerGain));
                 SendMouseDelta(dx, dy);
@@ -411,7 +442,9 @@ int wmain(int argc, wchar_t** argv)
 
             if (camera6DofAvailable)
             {
-                const float rightMeters =
+                const float lateralSign =
+                    invertLateralTranslation ? -1.0f : 1.0f;
+                const float rightMeters = lateralSign *
                     static_cast<float>(pose->x - centerPose->x);
                 const float upMeters =
                     static_cast<float>(pose->y - centerPose->y);
