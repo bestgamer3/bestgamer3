@@ -11,6 +11,8 @@ endif()
 
 add_library(MW2VRViewmodelHook SHARED
     MW2VRViewmodelHook.cpp
+    MW2VRLiveHook.cpp
+    MW2VRViewmodelHook.def
 )
 
 target_compile_definitions(MW2VRViewmodelHook PRIVATE
