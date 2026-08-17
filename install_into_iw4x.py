@@ -19,16 +19,32 @@ def backup_once(path: Path) -> None:
         print(f"Backup: {backup}")
 
 
-def insert_after_once(text: str, marker: str, addition: str, label: str) -> str:
-    if addition.strip() in text:
+def insert_after_line(text: str, marker: str, additions: list[str], label: str) -> str:
+    lines = text.splitlines(keepends=True)
+    existing = {line.strip() for line in lines}
+    if all(item.strip() in existing for item in additions):
         print(f"Already patched: {label}")
         return text
-    pos = text.find(marker)
-    if pos < 0:
-        fail(f"Could not find patch marker for {label}: {marker!r}")
-    end = pos + len(marker)
-    print(f"Patched: {label}")
-    return text[:end] + addition + text[end:]
+
+    for index, line in enumerate(lines):
+        if line.strip() != marker:
+            continue
+
+        if line.endswith("\r\n"):
+            eol = "\r\n"
+        elif line.endswith("\n"):
+            eol = "\n"
+        else:
+            eol = "\n"
+
+        indent = line[: len(line) - len(line.lstrip())]
+        inserted = "".join(indent + item + eol for item in additions)
+        lines.insert(index + 1, inserted)
+        print(f"Patched: {label}")
+        return "".join(lines)
+
+    fail(f"Could not find patch marker for {label}: {marker!r}")
+    return text
 
 
 def main() -> None:
@@ -49,50 +65,47 @@ def main() -> None:
 
     for name in ("OpenXR.hpp", "OpenXR.cpp"):
         source = PACKAGE / "src" / "Components" / "Modules" / name
+        if not source.is_file():
+            fail(f"Missing package source: {source}")
         target = modules / name
         shutil.copy2(source, target)
         print(f"Copied: {target}")
 
     loader_text = loader.read_text(encoding="utf-8")
-    newline = "\r\n" if "\r\n" in loader_text else "\n"
-    loader_text = insert_after_once(
+    loader_text = insert_after_line(
         loader_text,
-        '#include "Modules/Node.hpp"' + newline,
-        '#include "Modules/OpenXR.hpp"' + newline,
+        '#include "Modules/Node.hpp"',
+        ['#include "Modules/OpenXR.hpp"'],
         "Loader include",
     )
-    loader_text = insert_after_once(
+    loader_text = insert_after_line(
         loader_text,
-        "\tRegister(new Scheduler());" + newline,
-        "\tRegister(new OpenXR());" + newline,
+        "Register(new Scheduler());",
+        ["Register(new OpenXR());"],
         "OpenXR component registration",
     )
     loader.write_text(loader_text, encoding="utf-8", newline="")
 
     premake_text = premake.read_text(encoding="utf-8")
-    newline = "\r\n" if "\r\n" in premake_text else "\n"
-    link_block = (
-        '\tlibdirs { "./lib/openxr/win32" }' + newline
-        + '\tlinks { "d3d11", "dxgi", "openxr_loader" }' + newline
-    )
-    premake_text = insert_after_once(
+    premake_text = insert_after_line(
         premake_text,
-        "\tdependencies.imports()" + newline,
-        link_block,
+        "dependencies.imports()",
+        [
+            'libdirs { "./lib/openxr/win32" }',
+            'links { "d3d11", "dxgi", "openxr_loader" }',
+        ],
         "OpenXR/D3D11 linker settings",
     )
     premake.write_text(premake_text, encoding="utf-8", newline="")
 
     setup_src = PACKAGE / "tools" / "setup_openxr_vr.bat"
+    if not setup_src.is_file():
+        fail(f"Missing setup script: {setup_src}")
     setup_dst = root / "setup_openxr_vr.bat"
     shutil.copy2(setup_src, setup_dst)
     print(f"Copied: {setup_dst}")
 
     print("\nPhase 1 source patch installed.")
-    print("Next commands from the IW4x repo root:")
-    print("  setup_openxr_vr.bat")
-    print("  generate.bat")
-    print(r"Then build build\iw4x.sln -> Win32 / Release.")
 
 
 if __name__ == "__main__":
