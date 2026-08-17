@@ -19,6 +19,34 @@ struct HeadPose
     bool positionValid = false;
 };
 
+using ControllerPose = HeadPose;
+
+struct TouchControllerState
+{
+    ControllerPose leftAim{};
+    ControllerPose rightAim{};
+    ControllerPose leftGrip{};
+    ControllerPose rightGrip{};
+
+    float leftTrigger = 0.0f;
+    float rightTrigger = 0.0f;
+    float leftGripValue = 0.0f;
+    float rightGripValue = 0.0f;
+    float leftThumbX = 0.0f;
+    float leftThumbY = 0.0f;
+    float rightThumbX = 0.0f;
+    float rightThumbY = 0.0f;
+
+    bool leftStickClick = false;
+    bool rightStickClick = false;
+    bool leftPrimary = false;   // X on Oculus Touch
+    bool leftSecondary = false; // Y on Oculus Touch
+    bool rightPrimary = false;  // A on Oculus Touch
+    bool rightSecondary = false;// B on Oculus Touch
+    bool menu = false;
+    bool available = false;
+};
+
 class OpenXRHeadset
 {
 public:
@@ -33,9 +61,12 @@ public:
 
     // Waits for the next OpenXR frame, returns the tracked HMD pose and, when a
     // usable game window is supplied, submits a captured campaign frame to both
-    // headset eyes. Phase 2A duplicates the same game render into both eyes;
+    // headset eyes. Phase 2A/2B duplicates the same game render into both eyes;
     // true per-eye IW4 rendering is a later renderer-hook step.
     std::optional<HeadPose> WaitForPoseAndRender(HWND gameWindow);
+
+    // Latest controller state synchronized during WaitForPoseAndRender().
+    TouchControllerState Controllers() const;
 
     bool IsEyeRenderingActive() const;
 
