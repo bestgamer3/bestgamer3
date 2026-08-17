@@ -34,12 +34,16 @@ target_link_libraries(MW2CampaignVR PRIVATE
     openxr_loader
     d3d11
     dxgi
+    gdi32
     user32
     shell32
 )
 
 if(MSVC)
-    target_compile_options(MW2CampaignVR PRIVATE /W4 /permissive-)
+    # openxr_platform.h's D3D11 extension structs require the D3D11 COM types
+    # to have been declared first. Force-include the SDK header for every TU so
+    # this remains correct even when the OpenXR headers are included first.
+    target_compile_options(MW2CampaignVR PRIVATE /W4 /permissive- /FId3d11.h)
 endif()
 
 add_custom_command(TARGET MW2CampaignVR POST_BUILD
