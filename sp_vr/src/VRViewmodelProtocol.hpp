@@ -23,7 +23,7 @@ namespace mw2vr::viewmodel
     {
         std::uint32_t magic = kMagic;
         std::uint32_t version = kVersion;
-        std::uint32_t structSize = sizeof(SharedState);
+        std::uint32_t structSize = 0u;
 
         // Writer increments before and after each update. Odd means a write is
         // in progress; even means the payload is coherent. The 32-bit reader
