@@ -11,10 +11,16 @@
 #include <chrono>
 #include <vector>
 
+// IW4x still carries the legacy DirectX SDK. Its DXGI/D3D11 headers redefine
+// HRESULT macros that are also present in modern Windows SDK headers. The
+// definitions are equivalent, so silence only that legacy compatibility warning.
+#pragma warning(push)
+#pragma warning(disable: 4005)
 #include <d3d11.h>
 #include <dxgi.h>
 #include <openxr/openxr.h>
 #include <openxr/openxr_platform.h>
+#pragma warning(pop)
 
 namespace Components
 {
