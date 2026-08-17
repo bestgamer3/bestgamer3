@@ -10,7 +10,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif()
 
 add_library(MW2VRViewmodelHook SHARED
-    MW2VRViewmodelHook.cpp
+    MW2VRFinalViewmodelPlacement.cpp
     MW2VRLiveHook.cpp
     MW2VRViewmodelHook.def
 )
