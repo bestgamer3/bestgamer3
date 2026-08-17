@@ -20,9 +20,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(openxr)
 
 add_executable(MW2CampaignVR
-    src/main.cpp
+    src/main_phase3b.cpp
     src/GameProcess.cpp
     src/OpenXRHeadsetTouch.cpp
+    src/VRWeaponViewmodel.cpp
+    src/VRViewmodelBridge.cpp
 )
 
 target_compile_definitions(MW2CampaignVR PRIVATE
