@@ -10,6 +10,14 @@ struct HeadPose
     double yaw = 0.0;
     double roll = 0.0;
 
+    // Raw OpenXR orientation. Keeping the quaternion alongside the convenience
+    // Euler angles lets the Phase 3B weapon rig reproduce the controller pose
+    // without gimbal-lock or startup-pose assumptions.
+    double qx = 0.0;
+    double qy = 0.0;
+    double qz = 0.0;
+    double qw = 1.0;
+
     // OpenXR LOCAL-space position in meters: +X right, +Y up, -Z forward.
     double x = 0.0;
     double y = 0.0;
