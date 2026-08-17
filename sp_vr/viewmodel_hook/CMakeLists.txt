@@ -11,7 +11,7 @@ endif()
 
 add_library(MW2VRViewmodelHook SHARED
     MW2VRFinalViewmodelPlacement.cpp
-    MW2VRLiveHookBridge.cpp
+    MW2VRLiveHookAxisCluster.cpp
     MW2VRHandsFilterBridge.cpp
     MW2VRViewmodelHook.def
 )
