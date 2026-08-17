@@ -1,5 +1,6 @@
 #include "GameProcess.hpp"
 
+#include <shellapi.h>
 #include <tlhelp32.h>
 
 #include <filesystem>
@@ -10,6 +11,7 @@
 namespace
 {
     constexpr wchar_t kGameExe[] = L"iw4sp.exe";
+    constexpr wchar_t kSteamLaunchUri[] = L"steam://rungameid/10180";
 
     // CoD SCZ FoV Changer resolves these as module-base-relative pointer locations.
     // For the standard Steam-era iw4sp.exe base (0x400000), these resolve to
@@ -92,6 +94,7 @@ bool GameProcess::StartGameIfNeeded()
 {
     if (FindProcessId(kGameExe) != 0)
     {
+        std::cout << "MW2 campaign is already running. Attaching to iw4sp.exe...\n";
         return true;
     }
 
@@ -99,25 +102,26 @@ bool GameProcess::StartGameIfNeeded()
     if (!std::filesystem::exists(exePath))
     {
         std::wcerr << L"Could not find " << kGameExe
-                   << L". Put MW2CampaignVR.exe beside iw4sp.exe, or start the campaign first.\n";
+                   << L". Put MW2CampaignVR.exe beside iw4sp.exe.\n";
         return false;
     }
 
-    std::wstring command = L"\"" + exePath.wstring() + L"\"";
-    STARTUPINFOW si{};
-    si.cb = sizeof(si);
-    PROCESS_INFORMATION pi{};
+    std::wcout << L"Launching MW2 (2009) Single Player through Steam...\n";
+    const HINSTANCE launchResult = ShellExecuteW(
+        nullptr,
+        L"open",
+        kSteamLaunchUri,
+        nullptr,
+        std::filesystem::current_path().c_str(),
+        SW_SHOWNORMAL);
 
-    if (!CreateProcessW(nullptr, command.data(), nullptr, nullptr, FALSE, 0, nullptr,
-                        std::filesystem::current_path().c_str(), &si, &pi))
+    if (reinterpret_cast<INT_PTR>(launchResult) <= 32)
     {
-        PrintWin32Error("CreateProcessW(iw4sp.exe)");
+        std::cerr << "Could not open the Steam launch URI. Make sure Steam is installed and registered to handle steam:// links.\n";
         return false;
     }
 
-    CloseHandle(pi.hThread);
-    CloseHandle(pi.hProcess);
-    std::cout << "Started iw4sp.exe. Waiting for the campaign process...\n";
+    std::cout << "Steam launch requested. Waiting for iw4sp.exe...\n";
     return true;
 }
 
