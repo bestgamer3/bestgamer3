@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(openxr)
 add_executable(MW2CampaignVR
     src/main.cpp
     src/GameProcess.cpp
-    src/OpenXRHeadsetOpticalCenter.cpp
+    src/OpenXRHeadsetTouch.cpp
 )
 
 target_compile_definitions(MW2CampaignVR PRIVATE
