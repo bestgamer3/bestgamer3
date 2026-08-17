@@ -1,0 +1,68 @@
+name: Build MW2 VR Phase 1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - mw2-vr-build
+    paths:
+      - '.github/workflows/build-mw2-vr.yml'
+      - 'install_into_iw4x.py'
+      - 'src/Components/Modules/OpenXR.hpp'
+      - 'src/Components/Modules/OpenXR.cpp'
+      - 'tools/setup_openxr_vr.bat'
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout MW2 VR patch
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Clone IW4x
+        shell: cmd
+        run: git clone --recursive https://github.com/iw4x/iw4x-client.git iw4x-client
+
+      - name: Apply MW2 VR patch
+        shell: cmd
+        run: python install_into_iw4x.py "%CD%\iw4x-client"
+
+      - name: Build OpenXR loader
+        shell: cmd
+        working-directory: iw4x-client
+        run: call setup_openxr_vr.bat
+
+      - name: Generate IW4x solution
+        shell: cmd
+        working-directory: iw4x-client
+        run: call generate.bat
+
+      - name: Build IW4x Win32 Release
+        shell: cmd
+        working-directory: iw4x-client
+        run: msbuild build\iw4x.sln /m /p:Configuration=Release /p:Platform=Win32
+
+      - name: Collect compiled binaries
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force artifact | Out-Null
+          $iw4x = Get-ChildItem iw4x-client -Recurse -Filter iw4x.dll | Where-Object { $_.FullName -match 'Win32.*Release|Release.*Win32' } | Select-Object -First 1
+          if (-not $iw4x) { throw 'iw4x.dll not found after build' }
+          Copy-Item $iw4x.FullName artifact\iw4x.dll
+          Copy-Item iw4x-client\lib\openxr\win32\openxr_loader.dll artifact\openxr_loader.dll
+          @"
+          MW2 VR Phase 1
+          Built by GitHub Actions on Windows Server 2022.
+          Files: iw4x.dll + openxr_loader.dll
+          Set IW4X_VR=1 before launching iw4x.exe to enable Phase 1 OpenXR tracking.
+          "@ | Set-Content artifact\README.txt
+
+      - name: Upload MW2 VR build
+        uses: actions/upload-artifact@v4
+        with:
+          name: MW2-VR-Phase1-Win32
+          path: artifact
+          if-no-files-found: error
