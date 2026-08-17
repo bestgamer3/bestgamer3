@@ -17,6 +17,8 @@ namespace
     {
         float fov = 100.0f;
         double mouseGain = 8.0;
+        float unitsPerMeter = 40.0f;
+        bool enable6Dof = true;
     };
 
     double WrapDegrees(double value)
@@ -63,6 +65,15 @@ namespace
                 {
                     settings.mouseGain = std::clamp(std::stod(argv[++i]), 0.1, 50.0);
                 }
+                else if (arg == L"--world-scale" && i + 1 < argc)
+                {
+                    settings.unitsPerMeter =
+                        std::clamp(std::stof(argv[++i]), 5.0f, 200.0f);
+                }
+                else if (arg == L"--no-6dof")
+                {
+                    settings.enable6Dof = false;
+                }
             }
             catch (...)
             {
@@ -77,10 +88,14 @@ int wmain(int argc, wchar_t** argv)
 {
     const Settings settings = ParseSettings(argc, argv);
 
-    std::cout << "MW2 Campaign VR - Phase 1\n"
+    std::cout << "MW2 Campaign VR - Experimental Phase 2A\n"
                  "Single-player only: iw4sp.exe\n"
-                 "F8=recenter  F9=head-look on/off  F12=quit companion\n"
-              << "FOV=" << settings.fov << "  mouse gain=" << settings.mouseGain << "\n\n";
+                 "F8=recenter  F9=head-look  F10=6DoF  F12=quit companion\n"
+              << "FOV=" << settings.fov
+              << "  mouse gain=" << settings.mouseGain
+              << "  world scale=" << settings.unitsPerMeter << " units/m\n"
+              << "Eye output: campaign image duplicated to both OpenXR eyes.\n"
+                 "True per-eye parallax needs the next IW4 renderer-hook stage.\n\n";
 
     if (!GameProcess::StartGameIfNeeded())
     {
@@ -88,7 +103,7 @@ int wmain(int argc, wchar_t** argv)
     }
 
     GameProcess game;
-    for (int i = 0; i < 300 && !game.Attach(); ++i)
+    for (int i = 0; i < 600 && !game.Attach(); ++i)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
@@ -106,11 +121,21 @@ int wmain(int argc, wchar_t** argv)
     }
 
     bool headLookEnabled = true;
+    bool sixDofEnabled = settings.enable6Dof;
+    bool camera6DofAvailable = false;
     bool recenterRequested = true;
-    std::optional<HeadEuler> previousPose;
+
+    std::optional<HeadPose> previousPose;
+    std::optional<HeadPose> centerPose;
+
     auto nextFovWrite = std::chrono::steady_clock::now();
+    auto nextRefdefAttempt = std::chrono::steady_clock::now();
+    auto nextWindowRefresh = std::chrono::steady_clock::now();
+    HWND gameWindow = nullptr;
+
     bool lastF8 = false;
     bool lastF9 = false;
+    bool lastF10 = false;
     bool lastF12 = false;
 
     while (game.IsAlive())
@@ -120,20 +145,40 @@ int wmain(int argc, wchar_t** argv)
             break;
         }
 
+        const auto now = std::chrono::steady_clock::now();
+        if (now >= nextWindowRefresh || !gameWindow || !IsWindow(gameWindow))
+        {
+            gameWindow = game.MainWindow();
+            nextWindowRefresh = now + std::chrono::seconds(1);
+        }
+
         const bool f8 = (GetAsyncKeyState(VK_F8) & 0x8000) != 0;
         const bool f9 = (GetAsyncKeyState(VK_F9) & 0x8000) != 0;
+        const bool f10 = (GetAsyncKeyState(VK_F10) & 0x8000) != 0;
         const bool f12 = (GetAsyncKeyState(VK_F12) & 0x8000) != 0;
 
         if (f8 && !lastF8)
         {
             recenterRequested = true;
+            game.ClearHeadTranslation();
             std::cout << "Head reference recentered.\n";
         }
         if (f9 && !lastF9)
         {
             headLookEnabled = !headLookEnabled;
             recenterRequested = true;
-            std::cout << "Head-look " << (headLookEnabled ? "enabled" : "disabled") << ".\n";
+            std::cout << "Head-look " << (headLookEnabled ? "enabled" : "disabled")
+                      << ".\n";
+        }
+        if (f10 && !lastF10)
+        {
+            sixDofEnabled = !sixDofEnabled;
+            game.ClearHeadTranslation();
+            recenterRequested = true;
+            camera6DofAvailable = false;
+            nextRefdefAttempt = now;
+            std::cout << "6DoF translation " << (sixDofEnabled ? "enabled" : "disabled")
+                      << ".\n";
         }
         if (f12 && !lastF12)
         {
@@ -142,9 +187,9 @@ int wmain(int argc, wchar_t** argv)
         }
         lastF8 = f8;
         lastF9 = f9;
+        lastF10 = f10;
         lastF12 = f12;
 
-        const auto now = std::chrono::steady_clock::now();
         if (now >= nextFovWrite)
         {
             if (!game.ApplyFov(settings.fov))
@@ -154,20 +199,22 @@ int wmain(int argc, wchar_t** argv)
             nextFovWrite = now + std::chrono::seconds(1);
         }
 
-        const auto pose = xr.WaitForPose();
+        const auto pose = xr.WaitForPoseAndRender(gameWindow);
         if (!pose)
         {
             continue;
         }
 
-        if (recenterRequested || !previousPose)
+        if (recenterRequested || !previousPose || !centerPose)
         {
             previousPose = pose;
+            centerPose = pose;
             recenterRequested = false;
+            game.ClearHeadTranslation();
             continue;
         }
 
-        if (headLookEnabled)
+        if (headLookEnabled && pose->orientationValid && previousPose->orientationValid)
         {
             const double yawDelta = WrapDegrees(pose->yaw - previousPose->yaw);
             const double pitchDelta = WrapDegrees(pose->pitch - previousPose->pitch);
@@ -176,8 +223,47 @@ int wmain(int argc, wchar_t** argv)
             SendMouseDelta(dx, dy);
         }
 
+        if (sixDofEnabled && pose->positionValid && centerPose->positionValid)
+        {
+            if (!camera6DofAvailable && now >= nextRefdefAttempt)
+            {
+                camera6DofAvailable = game.EnsureRefdefLocated();
+                if (!camera6DofAvailable)
+                {
+                    nextRefdefAttempt = now + std::chrono::seconds(2);
+                }
+                else
+                {
+                    std::cout << "6DoF: view-only camera translation active.\n";
+                }
+            }
+
+            if (camera6DofAvailable)
+            {
+                const float rightMeters =
+                    static_cast<float>(pose->x - centerPose->x);
+                const float upMeters =
+                    static_cast<float>(pose->y - centerPose->y);
+                const float forwardMeters =
+                    static_cast<float>(-(pose->z - centerPose->z));
+
+                if (!game.ApplyHeadTranslation(
+                        rightMeters, upMeters, forwardMeters,
+                        settings.unitsPerMeter))
+                {
+                    camera6DofAvailable = false;
+                    nextRefdefAttempt = now + std::chrono::seconds(2);
+                }
+            }
+        }
+        else
+        {
+            game.ClearHeadTranslation();
+        }
+
         previousPose = pose;
     }
 
+    game.ClearHeadTranslation();
     return 0;
 }
