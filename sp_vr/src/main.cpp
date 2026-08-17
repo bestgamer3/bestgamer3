@@ -10,6 +10,7 @@
 #include <optional>
 #include <string>
 #include <thread>
+#include <utility>
 
 namespace
 {
@@ -17,8 +18,11 @@ namespace
     {
         float fov = 100.0f;
         double mouseGain = 8.0;
+        double controllerGain = 8.0;
         float unitsPerMeter = 40.0f;
+        float stickDeadzone = 0.35f;
         bool enable6Dof = true;
+        bool enableTouch = true;
     };
 
     double WrapDegrees(double value)
@@ -49,6 +53,90 @@ namespace
         SendInput(1, &input, sizeof(input));
     }
 
+    struct InjectedInputState
+    {
+        bool fire = false;
+        bool ads = false;
+        bool forward = false;
+        bool back = false;
+        bool left = false;
+        bool right = false;
+        bool reload = false;
+        bool jump = false;
+
+        static void SetMouseButton(
+            bool& current,
+            bool desired,
+            DWORD downFlag,
+            DWORD upFlag)
+        {
+            if (current == desired)
+            {
+                return;
+            }
+
+            INPUT input{};
+            input.type = INPUT_MOUSE;
+            input.mi.dwFlags = desired ? downFlag : upFlag;
+            SendInput(1, &input, sizeof(input));
+            current = desired;
+        }
+
+        static void SetKey(bool& current, bool desired, WORD key)
+        {
+            if (current == desired)
+            {
+                return;
+            }
+
+            INPUT input{};
+            input.type = INPUT_KEYBOARD;
+            input.ki.wVk = key;
+            input.ki.dwFlags = desired ? 0 : KEYEVENTF_KEYUP;
+            SendInput(1, &input, sizeof(input));
+            current = desired;
+        }
+
+        void Apply(const TouchControllerState& touch, float deadzone)
+        {
+            SetMouseButton(
+                fire,
+                touch.rightTrigger >= 0.55f,
+                MOUSEEVENTF_LEFTDOWN,
+                MOUSEEVENTF_LEFTUP);
+            SetMouseButton(
+                ads,
+                touch.leftTrigger >= 0.55f,
+                MOUSEEVENTF_RIGHTDOWN,
+                MOUSEEVENTF_RIGHTUP);
+
+            SetKey(forward, touch.leftThumbY > deadzone, 'W');
+            SetKey(back, touch.leftThumbY < -deadzone, 'S');
+            SetKey(left, touch.leftThumbX < -deadzone, 'A');
+            SetKey(right, touch.leftThumbX > deadzone, 'D');
+
+            // CV1 Touch X = reload, A = jump. Grip/squeeze is deliberately
+            // left unbound in Phase 3A because it will become the physical
+            // weapon-hand / two-hand interaction input in the viewmodel stage.
+            SetKey(reload, touch.leftPrimary, 'R');
+            SetKey(jump, touch.rightPrimary, VK_SPACE);
+        }
+
+        void ReleaseAll()
+        {
+            SetMouseButton(
+                fire, false, MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP);
+            SetMouseButton(
+                ads, false, MOUSEEVENTF_RIGHTDOWN, MOUSEEVENTF_RIGHTUP);
+            SetKey(forward, false, 'W');
+            SetKey(back, false, 'S');
+            SetKey(left, false, 'A');
+            SetKey(right, false, 'D');
+            SetKey(reload, false, 'R');
+            SetKey(jump, false, VK_SPACE);
+        }
+    };
+
     Settings ParseSettings(int argc, wchar_t** argv)
     {
         Settings settings;
@@ -59,11 +147,23 @@ namespace
             {
                 if (arg == L"--fov" && i + 1 < argc)
                 {
-                    settings.fov = std::clamp(std::stof(argv[++i]), 65.0f, 140.0f);
+                    settings.fov =
+                        std::clamp(std::stof(argv[++i]), 65.0f, 140.0f);
                 }
                 else if (arg == L"--gain" && i + 1 < argc)
                 {
-                    settings.mouseGain = std::clamp(std::stod(argv[++i]), 0.1, 50.0);
+                    settings.mouseGain =
+                        std::clamp(std::stod(argv[++i]), 0.1, 50.0);
+                }
+                else if (arg == L"--controller-gain" && i + 1 < argc)
+                {
+                    settings.controllerGain =
+                        std::clamp(std::stod(argv[++i]), 0.1, 50.0);
+                }
+                else if (arg == L"--deadzone" && i + 1 < argc)
+                {
+                    settings.stickDeadzone =
+                        std::clamp(std::stof(argv[++i]), 0.05f, 0.90f);
                 }
                 else if (arg == L"--world-scale" && i + 1 < argc)
                 {
@@ -73,6 +173,10 @@ namespace
                 else if (arg == L"--no-6dof")
                 {
                     settings.enable6Dof = false;
+                }
+                else if (arg == L"--no-touch")
+                {
+                    settings.enableTouch = false;
                 }
             }
             catch (...)
@@ -88,14 +192,25 @@ int wmain(int argc, wchar_t** argv)
 {
     const Settings settings = ParseSettings(argc, argv);
 
-    std::cout << "MW2 Campaign VR - Experimental Phase 2A\n"
-                 "Single-player only: iw4sp.exe\n"
-                 "F8=recenter  F9=head-look  F10=6DoF  F12=quit companion\n"
-              << "FOV=" << settings.fov
-              << "  mouse gain=" << settings.mouseGain
-              << "  world scale=" << settings.unitsPerMeter << " units/m\n"
-              << "Eye output: campaign image duplicated to both OpenXR eyes.\n"
-                 "True per-eye parallax needs the next IW4 renderer-hook stage.\n\n";
+    std::cout
+        << "MW2 Campaign VR - Experimental Phase 3A Touch Controls\n"
+           "Single-player only: iw4sp.exe\n"
+           "F8=recenter  F9=head-look  F10=6DoF  F12=quit companion\n"
+        << "FOV=" << settings.fov
+        << "  head gain=" << settings.mouseGain
+        << "  controller gain=" << settings.controllerGain
+        << "  world scale=" << settings.unitsPerMeter << " units/m\n\n"
+           "Rift Touch mapping:\n"
+           "  Right controller aim = weapon/camera aim adjustment\n"
+           "  Right trigger        = fire\n"
+           "  Left trigger         = ADS / scope\n"
+           "  Left stick           = WASD movement\n"
+           "  X                     = reload\n"
+           "  A                     = jump\n\n"
+           "Phase 2B Rift optical-center eye correction is preserved.\n"
+           "Phase 3A tracks both aim/grip hand poses, but IW4 still couples the\n"
+           "rendered weapon to the game camera. Physical viewmodel-to-hand\n"
+           "attachment is the next Phase 3B engine-hook stage.\n\n";
 
     if (!GameProcess::StartGameIfNeeded())
     {
@@ -116,7 +231,9 @@ int wmain(int argc, wchar_t** argv)
     OpenXRHeadset xr;
     if (!xr.Initialize())
     {
-        std::cerr << "OpenXR initialization failed. Make sure your headset is connected and an OpenXR runtime is active.\n";
+        std::cerr
+            << "OpenXR initialization failed. Make sure your headset is "
+               "connected and an OpenXR runtime is active.\n";
         return 3;
     }
 
@@ -127,6 +244,8 @@ int wmain(int argc, wchar_t** argv)
 
     std::optional<HeadPose> previousPose;
     std::optional<HeadPose> centerPose;
+    std::optional<std::pair<double, double>> previousHandRelativeAngles;
+    InjectedInputState injectedInput;
 
     auto nextFovWrite = std::chrono::steady_clock::now();
     auto nextRefdefAttempt = std::chrono::steady_clock::now();
@@ -160,25 +279,30 @@ int wmain(int argc, wchar_t** argv)
         if (f8 && !lastF8)
         {
             recenterRequested = true;
+            previousHandRelativeAngles.reset();
             game.ClearHeadTranslation();
-            std::cout << "Head reference recentered.\n";
+            std::cout << "Head/controller reference recentered.\n";
         }
         if (f9 && !lastF9)
         {
             headLookEnabled = !headLookEnabled;
             recenterRequested = true;
-            std::cout << "Head-look " << (headLookEnabled ? "enabled" : "disabled")
-                      << ".\n";
+            previousHandRelativeAngles.reset();
+            std::cout
+                << "Head-look "
+                << (headLookEnabled ? "enabled" : "disabled") << ".\n";
         }
         if (f10 && !lastF10)
         {
             sixDofEnabled = !sixDofEnabled;
             game.ClearHeadTranslation();
             recenterRequested = true;
+            previousHandRelativeAngles.reset();
             camera6DofAvailable = false;
             nextRefdefAttempt = now;
-            std::cout << "6DoF translation " << (sixDofEnabled ? "enabled" : "disabled")
-                      << ".\n";
+            std::cout
+                << "6DoF translation "
+                << (sixDofEnabled ? "enabled" : "disabled") << ".\n";
         }
         if (f12 && !lastF12)
         {
@@ -194,7 +318,9 @@ int wmain(int argc, wchar_t** argv)
         {
             if (!game.ApplyFov(settings.fov))
             {
-                std::cerr << "Warning: could not update campaign FOV. The game build may use different dvar offsets.\n";
+                std::cerr
+                    << "Warning: could not update campaign FOV. The game build "
+                       "may use different dvar offsets.\n";
             }
             nextFovWrite = now + std::chrono::seconds(1);
         }
@@ -202,25 +328,72 @@ int wmain(int argc, wchar_t** argv)
         const auto pose = xr.WaitForPoseAndRender(gameWindow);
         if (!pose)
         {
+            injectedInput.ReleaseAll();
+            previousHandRelativeAngles.reset();
             continue;
         }
+
+        const TouchControllerState touch = xr.Controllers();
+        const bool gameFocused =
+            gameWindow && IsWindow(gameWindow) && GetForegroundWindow() == gameWindow;
 
         if (recenterRequested || !previousPose || !centerPose)
         {
             previousPose = pose;
             centerPose = pose;
             recenterRequested = false;
+            previousHandRelativeAngles.reset();
             game.ClearHeadTranslation();
+            injectedInput.ReleaseAll();
             continue;
         }
 
-        if (headLookEnabled && pose->orientationValid && previousPose->orientationValid)
+        if (gameFocused && headLookEnabled && pose->orientationValid &&
+            previousPose->orientationValid)
         {
             const double yawDelta = WrapDegrees(pose->yaw - previousPose->yaw);
-            const double pitchDelta = WrapDegrees(pose->pitch - previousPose->pitch);
-            const LONG dx = static_cast<LONG>(std::lround(yawDelta * settings.mouseGain));
-            const LONG dy = static_cast<LONG>(std::lround(-pitchDelta * settings.mouseGain));
+            const double pitchDelta =
+                WrapDegrees(pose->pitch - previousPose->pitch);
+            const LONG dx = static_cast<LONG>(
+                std::lround(yawDelta * settings.mouseGain));
+            const LONG dy = static_cast<LONG>(
+                std::lround(-pitchDelta * settings.mouseGain));
             SendMouseDelta(dx, dy);
+        }
+
+        if (settings.enableTouch && gameFocused && touch.available &&
+            touch.rightAim.orientationValid && pose->orientationValid)
+        {
+            // Use the hand's angle relative to the HMD, not raw world angle.
+            // This prevents a head+hand rotation together from being counted
+            // twice while still letting hand rotation steer IW4 aim.
+            const double relativeYaw =
+                WrapDegrees(touch.rightAim.yaw - pose->yaw);
+            const double relativePitch =
+                WrapDegrees(touch.rightAim.pitch - pose->pitch);
+
+            if (previousHandRelativeAngles)
+            {
+                const double yawDelta = WrapDegrees(
+                    relativeYaw - previousHandRelativeAngles->first);
+                const double pitchDelta = WrapDegrees(
+                    relativePitch - previousHandRelativeAngles->second);
+
+                const LONG dx = static_cast<LONG>(
+                    std::lround(yawDelta * settings.controllerGain));
+                const LONG dy = static_cast<LONG>(
+                    std::lround(-pitchDelta * settings.controllerGain));
+                SendMouseDelta(dx, dy);
+            }
+
+            previousHandRelativeAngles =
+                std::make_pair(relativeYaw, relativePitch);
+            injectedInput.Apply(touch, settings.stickDeadzone);
+        }
+        else
+        {
+            previousHandRelativeAngles.reset();
+            injectedInput.ReleaseAll();
         }
 
         if (sixDofEnabled && pose->positionValid && centerPose->positionValid)
@@ -248,7 +421,9 @@ int wmain(int argc, wchar_t** argv)
                     static_cast<float>(-(pose->z - centerPose->z));
 
                 if (!game.ApplyHeadTranslation(
-                        rightMeters, upMeters, forwardMeters,
+                        rightMeters,
+                        upMeters,
+                        forwardMeters,
                         settings.unitsPerMeter))
                 {
                     camera6DofAvailable = false;
@@ -264,6 +439,7 @@ int wmain(int argc, wchar_t** argv)
         previousPose = pose;
     }
 
+    injectedInput.ReleaseAll();
     game.ClearHeadTranslation();
     return 0;
 }
