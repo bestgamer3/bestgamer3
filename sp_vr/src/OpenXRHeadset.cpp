@@ -36,6 +36,42 @@ namespace
         return false;
     }
 
+    XrFovf MakeCenteredMonoscopicFov(
+        const std::array<XrView, kEyeCount>& views)
+    {
+        float horizontalHalf = std::min({
+            std::abs(views[0].fov.angleLeft),
+            std::abs(views[0].fov.angleRight),
+            std::abs(views[1].fov.angleLeft),
+            std::abs(views[1].fov.angleRight),
+        });
+        float verticalHalf = std::min({
+            std::abs(views[0].fov.angleUp),
+            std::abs(views[0].fov.angleDown),
+            std::abs(views[1].fov.angleUp),
+            std::abs(views[1].fov.angleDown),
+        });
+
+        if (!std::isfinite(horizontalHalf) || horizontalHalf < 0.1f)
+        {
+            horizontalHalf = 0.80f;
+        }
+        if (!std::isfinite(verticalHalf) || verticalHalf < 0.1f)
+        {
+            verticalHalf = 0.80f;
+        }
+
+        horizontalHalf = std::min(horizontalHalf, 1.45f);
+        verticalHalf = std::min(verticalHalf, 1.45f);
+
+        XrFovf centered{};
+        centered.angleLeft = -horizontalHalf;
+        centered.angleRight = horizontalHalf;
+        centered.angleUp = verticalHalf;
+        centered.angleDown = -verticalHalf;
+        return centered;
+    }
+
     HeadPose PoseToHeadPose(const XrSpaceLocation& location)
     {
         HeadPose result{};
@@ -234,6 +270,32 @@ struct OpenXRHeadset::Impl
             return false;
         }
 
+        int cropX = 0;
+        int cropY = 0;
+        int cropWidth = sourceWidth;
+        int cropHeight = sourceHeight;
+
+        const double sourceAspect =
+            static_cast<double>(sourceWidth) / static_cast<double>(sourceHeight);
+        const double targetAspect =
+            static_cast<double>(width) / static_cast<double>(height);
+
+        // Phase 2A is still monoscopic. Preserve the center of the campaign
+        // image while matching each eye texture's aspect ratio instead of
+        // stretching the full desktop frame into a portrait-shaped eye image.
+        if (sourceAspect > targetAspect)
+        {
+            cropWidth = std::max(
+                1, static_cast<int>(std::lround(sourceHeight * targetAspect)));
+            cropX = std::max(0, (sourceWidth - cropWidth) / 2);
+        }
+        else if (sourceAspect < targetAspect)
+        {
+            cropHeight = std::max(
+                1, static_cast<int>(std::lround(sourceWidth / targetAspect)));
+            cropY = std::max(0, (sourceHeight - cropHeight) / 2);
+        }
+
         HDC desktopDc = GetDC(nullptr);
         if (!desktopDc)
         {
@@ -245,7 +307,7 @@ struct OpenXRHeadset::Impl
             captureDc,
             0, 0, width, height,
             desktopDc,
-            origin.x, origin.y, sourceWidth, sourceHeight,
+            origin.x + cropX, origin.y + cropY, cropWidth, cropHeight,
             SRCCOPY);
         ReleaseDC(nullptr, desktopDc);
         GdiFlush();
@@ -481,7 +543,7 @@ struct OpenXRHeadset::Impl
         }
 
         eyeRenderingReady = true;
-        std::cout << "OpenXR: Phase 2A eye swapchains ready (campaign frame is duplicated to both eyes).\n";
+        std::cout << "OpenXR: Phase 2A eye swapchains ready (centered monoscopic campaign frame in both eyes).\n";
         return true;
     }
 
@@ -635,7 +697,7 @@ struct OpenXRHeadset::Impl
             view.next = nullptr;
         }
 
-        std::cout << "OpenXR: initialized with 6DoF tracking and Phase 2A eye output.\n";
+        std::cout << "OpenXR: initialized with 6DoF tracking and centered Phase 2A eye output.\n";
         return true;
     }
 
@@ -729,13 +791,20 @@ struct OpenXRHeadset::Impl
             viewSpace, localSpace, frameState.predictedDisplayTime, &headLocation),
             "xrLocateSpace(HMD)");
 
+        const bool headPoseValid =
+            locatedHead &&
+            (headLocation.locationFlags & XR_SPACE_LOCATION_ORIENTATION_VALID_BIT) != 0 &&
+            (headLocation.locationFlags & XR_SPACE_LOCATION_POSITION_VALID_BIT) != 0;
+
         std::array<XrCompositionLayerProjectionView, kEyeCount> projectionViews{};
         bool frameCaptured = false;
 
-        if (locatedViews && viewCount == kEyeCount && frameState.shouldRender &&
-            eyeRenderingReady && gameWindow && IsWindow(gameWindow))
+        if (locatedViews && viewCount == kEyeCount && headPoseValid &&
+            frameState.shouldRender && eyeRenderingReady &&
+            gameWindow && IsWindow(gameWindow))
         {
             frameCaptured = true;
+            const XrFovf centeredFov = MakeCenteredMonoscopicFov(views);
 
             for (std::size_t eye = 0; eye < kEyeCount; ++eye)
             {
@@ -787,8 +856,15 @@ struct OpenXRHeadset::Impl
                 }
 
                 projectionViews[eye].type = XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW;
-                projectionViews[eye].pose = views[eye].pose;
-                projectionViews[eye].fov = views[eye].fov;
+
+                // Phase 2A duplicates a single monoscopic MW2 render. Giving
+                // that same image the physical left/right eye poses creates
+                // false binocular disparity (the image looks split/off-center,
+                // especially on Rift CV1). Submit both textures from the HMD
+                // center with a symmetric FOV until true per-eye IW4 rendering
+                // is implemented.
+                projectionViews[eye].pose = headLocation.pose;
+                projectionViews[eye].fov = centeredFov;
                 projectionViews[eye].subImage.swapchain = swapchains[eye];
                 projectionViews[eye].subImage.imageRect.offset = {0, 0};
                 projectionViews[eye].subImage.imageRect.extent = {width, height};
