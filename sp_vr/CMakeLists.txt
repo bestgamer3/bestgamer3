@@ -35,6 +35,7 @@ target_link_libraries(MW2CampaignVR PRIVATE
     d3d11
     dxgi
     user32
+    shell32
 )
 
 if(MSVC)
