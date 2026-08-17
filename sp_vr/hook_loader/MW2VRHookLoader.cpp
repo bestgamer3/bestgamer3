@@ -72,9 +72,7 @@ namespace
         return GetExitCodeThread(thread, &exitCode) != FALSE;
     }
 
-    std::uintptr_t RemoteKernelFunction(
-        DWORD pid,
-        const char* functionName)
+    std::uintptr_t RemoteKernelFunction(DWORD pid, const char* functionName)
     {
         HMODULE localKernel = GetModuleHandleW(L"kernel32.dll");
         if (!localKernel)
@@ -87,8 +85,7 @@ namespace
             return 0;
         }
 
-        const std::uintptr_t remoteKernel =
-            FindRemoteModule(pid, L"kernel32.dll");
+        const std::uintptr_t remoteKernel = FindRemoteModule(pid, L"kernel32.dll");
         if (!remoteKernel)
         {
             return 0;
@@ -182,16 +179,17 @@ namespace
         return rva;
     }
 
-    bool RunRemoteInstaller(
+    bool RunRemoteExport(
         HANDLE process,
         std::uintptr_t remoteDll,
-        const std::filesystem::path& dllPath)
+        const std::filesystem::path& dllPath,
+        const char* exportName,
+        const char* friendlyName)
     {
-        const std::uintptr_t installerRva =
-            ExportRva(dllPath, "MW2VR_InstallHook");
+        const std::uintptr_t installerRva = ExportRva(dllPath, exportName);
         if (!installerRva)
         {
-            std::cerr << "Could not resolve MW2VR_InstallHook export.\n";
+            std::cerr << "Could not resolve " << exportName << " export.\n";
             return false;
         }
 
@@ -205,7 +203,7 @@ namespace
             nullptr);
         if (!thread)
         {
-            std::cerr << "CreateRemoteThread(MW2VR_InstallHook) failed: "
+            std::cerr << "CreateRemoteThread(" << exportName << ") failed: "
                       << GetLastError() << "\n";
             return false;
         }
@@ -215,14 +213,15 @@ namespace
         CloseHandle(thread);
         if (!completed)
         {
-            std::cerr << "MW2VR_InstallHook did not finish normally.\n";
+            std::cerr << friendlyName << " did not finish normally.\n";
             return false;
         }
         if (exitCode == 0)
         {
             std::cerr
-                << "The viewmodel hook refused to install because its runtime "
-                   "IW4 SP validation did not match. Check MW2VRViewmodelHook.log.\n";
+                << friendlyName
+                << " refused to install because its runtime IW4 SP validation "
+                   "did not match. Check MW2VRViewmodelHook.log.\n";
             return false;
         }
         return true;
@@ -284,16 +283,36 @@ int wmain()
         return 4;
     }
 
-    const bool installed = RunRemoteInstaller(process, remoteDll, dllPath);
-    CloseHandle(process);
-    if (!installed)
+    // This must run first. It discovers an internal DObj getter through the
+    // original CG_AddPlayerWeapon target before the outer call is redirected
+    // by MW2VR_InstallHook.
+    const bool handsInstalled = RunRemoteExport(
+        process,
+        remoteDll,
+        dllPath,
+        "MW2VR_InstallHandsFilter",
+        "The weapon-only hands/arms filter");
+    if (!handsInstalled)
     {
+        CloseHandle(process);
         return 5;
     }
 
+    const bool viewmodelInstalled = RunRemoteExport(
+        process,
+        remoteDll,
+        dllPath,
+        "MW2VR_InstallHook",
+        "The VR viewmodel placement hook");
+    CloseHandle(process);
+    if (!viewmodelInstalled)
+    {
+        return 6;
+    }
+
     std::cout
-        << "MW2 VR live weapon-viewmodel hook installed successfully.\n"
-           "The actual first-person viewmodel is now routed through the Touch "
-           "controller transform when a valid VR pose and IW4 camera are available.\n";
+        << "MW2 VR weapon-only viewmodel hooks installed successfully.\n"
+           "The stock baked FPS hand/arm submodel is filtered from the tracked "
+           "viewmodel while the actual MW2 weapon remains controller-driven.\n";
     return 0;
 }
