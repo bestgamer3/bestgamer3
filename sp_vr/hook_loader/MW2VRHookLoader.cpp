@@ -283,29 +283,31 @@ int wmain()
         return 4;
     }
 
-    // This must run first. It discovers an internal DObj getter through the
-    // original CG_AddPlayerWeapon target before the outer call is redirected
-    // by MW2VR_InstallHook.
-    const bool handsInstalled = RunRemoteExport(
-        process,
-        remoteDll,
-        dllPath,
-        "MW2VR_InstallHandsFilter",
-        "The weapon-only hands/arms filter");
-    if (!handsInstalled)
-    {
-        CloseHandle(process);
-        return 5;
-    }
-
+    // Install the already-proven Phase 3D viewmodel hook first. It captures
+    // and retains the exact original CG_AddPlayerWeapon target from this
+    // executable before redirecting the outer callsite.
     const bool viewmodelInstalled = RunRemoteExport(
         process,
         remoteDll,
         dllPath,
         "MW2VR_InstallHook",
         "The VR viewmodel placement hook");
-    CloseHandle(process);
     if (!viewmodelInstalled)
+    {
+        CloseHandle(process);
+        return 5;
+    }
+
+    // Phase 3E now reuses that captured original target instead of trying to
+    // rediscover CG_AddPlayerWeapon with a second dvar-cluster scan.
+    const bool handsInstalled = RunRemoteExport(
+        process,
+        remoteDll,
+        dllPath,
+        "MW2VR_InstallHandsFilter",
+        "The weapon-only hands/arms filter");
+    CloseHandle(process);
+    if (!handsInstalled)
     {
         return 6;
     }
