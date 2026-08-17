@@ -1,0 +1,6 @@
+LIBRARY MW2VRViewmodelHook
+EXPORTS
+    MW2VR_InstallHook=_MW2VR_InstallHook@4
+    MW2VR_ResetWeaponBaselines=_MW2VR_ResetWeaponBaselines
+    MW2VR_HasViewmodelPose=_MW2VR_HasViewmodelPose
+    MW2VR_ApplyWeaponPlacement=_MW2VR_ApplyWeaponPlacement
