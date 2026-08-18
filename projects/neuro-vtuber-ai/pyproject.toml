@@ -1,0 +1,9 @@
+[project]
+name = "nova-ai-vtuber"
+version = "0.1.0"
+description = "Original Neuro-sama-style AI VTuber starter architecture"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
